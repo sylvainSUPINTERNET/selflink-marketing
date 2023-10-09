@@ -11,7 +11,7 @@ def load_instagram_micro_influenceur():
     L = instaloader.Instaloader()
     
 
-    hashtag = "police"
+    hashtag = "modeethique"
     num_posts = 5  # Nombre de publications à examiner
     potential_influencers = []
 
