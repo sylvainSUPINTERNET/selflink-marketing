@@ -9,7 +9,11 @@ def load_instagram_micro_influenceur():
     
     
     L = instaloader.Instaloader()
-    
+    # L.context._session.proxies = {
+    #     'http': 'http://localhost:8080',
+    #     'http': 'socks5://127.0.0.1:9050',
+    #     'https': 'http://localhost:8080',
+    # }
 
     hashtag = "modeethique"
     num_posts = 5  
