@@ -12,7 +12,7 @@ def load_instagram_micro_influenceur():
     
 
     hashtag = "modeethique"
-    num_posts = 5  # Nombre de publications à examiner
+    num_posts = 5  
     potential_influencers = []
 
     for post in L.get_hashtag_posts(hashtag):
@@ -21,8 +21,7 @@ def load_instagram_micro_influenceur():
         
         profile = post.owner_profile
 
-        # Ici, définissez vos critères pour un micro-influenceur.
-        # Par exemple, vérifiez si le nombre d'abonnés est entre 1k et 50k :
+        # 1k / 50k subs
         if 1000 <= profile.followers <= 50000:
             potential_influencers.append(profile)
 
