@@ -8,6 +8,7 @@ def load_instagram_micro_influenceur():
     LOG.info("Loading instagram profiles ...")    
     
     
+    # https://proxyscrape.com/
     L = instaloader.Instaloader()
     # L.context._session.proxies = {
     #     'http': 'http://localhost:8080',

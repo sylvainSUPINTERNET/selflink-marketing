@@ -1,1 +1,2 @@
 instaloader==4.10
+PySocks==1.7.1
