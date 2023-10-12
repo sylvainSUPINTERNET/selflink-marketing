@@ -6,6 +6,9 @@ setup(
     packages=find_packages(),
     install_requires=[
         'instaloader',
+        'google-api-python-client',
+        'google-auth-oauthlib',
+        'google-auth-httplib2',
         'PySocks'
     ]  
 )
