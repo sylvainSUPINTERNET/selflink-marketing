@@ -9,6 +9,7 @@ setup(
         'google-api-python-client',
         'google-auth-oauthlib',
         'google-auth-httplib2',
-        'PySocks'
+        'PySocks',
+        'neo4j'
     ]  
 )
