@@ -1,13 +1,10 @@
-from services.instagram.instagram import load_instagram_micro_influenceur
-import socket
-import socks
+from typing import List
+from services.youtube.youtube import build_tree_microinfluenceur
+
+THEMES:List[str] = ["lifestyle", "formation", "spiritual"]
 
 def main():
-    
-    socks.set_default_proxy(socks.SOCKS5, "localhost", 9050)
-    socket.socket = socks.socksocket
-    
-    load_instagram_micro_influenceur()
+    build_tree_microinfluenceur(sheets_name_list=THEMES)
 
 if __name__ == "__main__":
     main()

@@ -10,6 +10,8 @@ setup(
         'google-auth-oauthlib',
         'google-auth-httplib2',
         'PySocks',
-        'neo4j'
+        'neo4j',
+        'pandas',
+        'openpyxl'
     ]  
 )
