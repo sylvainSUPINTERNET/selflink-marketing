@@ -12,6 +12,7 @@ setup(
         'PySocks',
         'neo4j',
         'pandas',
-        'openpyxl'
+        'openpyxl',
+        'python-dotenv'
     ]  
 )
