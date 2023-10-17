@@ -54,6 +54,21 @@ class YoutubeInfluenceur:
         except Exception as e:
             logging.info(e)
             
+    def build_tree_link_subcategory_influenceur(self, influenceur, subcategory):
+        try:
+            with self.driver.session() as session:
+                session.execute_write(self._tree_add_relation_subcategory_influenceur, influenceur, subcategory)
+        except Exception as e:
+            logging.info(e)
+            
+    @staticmethod
+    def _tree_add_relation_subcategory_influenceur(tx, influenceur, subcategory):
+        tx.run("""
+        MATCH (a:Influenceur),(b:SubCategory)
+        WHERE a.name = $name AND b.name = $subcategory
+        MERGE (a)-[r:IS_SUBCATEGORY]->(b)
+        """, name=influenceur, subcategory=subcategory)
+    
     @staticmethod
     def _tree_add_relation_category_influenceur(tx, influenceur, category):
         tx.run("""

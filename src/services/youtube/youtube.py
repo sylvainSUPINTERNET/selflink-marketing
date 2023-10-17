@@ -37,3 +37,18 @@ def get_influenceur_all_categories() -> dict:
         resp[category] = list(df["channel_name"].unique())
         
     return resp
+
+def get_influenceur_all_subcategories() -> dict:
+    current_path = os.path.dirname(f"{os.path.abspath(__file__)}")
+    all_sheets_df = pd.read_excel(current_path+"/micro_influenceur.xlsx", sheet_name=None)
+    
+    sb = dict()    
+
+    for sheetNameCat in all_sheets_df:
+        df = all_sheets_df[sheetNameCat]
+        for index, sc in enumerate(df["sub_category"].unique()):
+            if sc not in sb:
+                sb[sc] = []
+            channel_names = df[df["sub_category"] == sc]["channel_name"].unique().tolist()
+            sb[sc].extend(channel_names)
+    return sb
