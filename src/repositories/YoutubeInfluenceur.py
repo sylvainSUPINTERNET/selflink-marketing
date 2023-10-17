@@ -46,7 +46,22 @@ class YoutubeInfluenceur:
                 session.execute_write(self._tree_add_node_subcategory)
         except Exception as e:
             logging.info(e)
+    
+    def build_tree_link_category_influenceur(self, influenceur, category):
+        try:
+            with self.driver.session() as session:
+                session.execute_write(self._tree_add_relation_category_influenceur, influenceur, category)
+        except Exception as e:
+            logging.info(e)
             
+    @staticmethod
+    def _tree_add_relation_category_influenceur(tx, influenceur, category):
+        tx.run("""
+        MATCH (a:Influenceur),(b:Category)
+        WHERE a.name = $name AND b.name = $category
+        MERGE (a)-[r:IS_CATEGORY]->(b)
+        """, name=influenceur, category=category)
+    
     @staticmethod
     def _tree_add_node_category(tx):
         tx.run('CREATE CONSTRAINT FOR (a:Category) REQUIRE a.name IS UNIQUE')
@@ -54,17 +69,16 @@ class YoutubeInfluenceur:
     @staticmethod
     def _tree_add_node_subcategory(tx):
         tx.run('CREATE CONSTRAINT FOR (a:SubCategory) REQUIRE a.name IS UNIQUE')
-        
 
     @staticmethod
     def _insert_influenceur(tx, influenceur):
-        tx.run("CREATE (a:Influenceur {name: $name})", name=influenceur)
+        tx.run("MERGE (a:Influenceur {name: $name})", name=influenceur)
         
     @staticmethod
     def _insert_category(tx, category_list):
         query="""
         UNWIND $category_list AS category
-        CREATE (a:Category {name: category})
+        MERGE (a:Category {name: category})
         """
         tx.run(query, category_list=category_list)
         
@@ -72,6 +86,7 @@ class YoutubeInfluenceur:
     def _insert_subcategory(tx, subcategory_list):
         query="""
         UNWIND $subcategory_list AS subcategory
-        CREATE (a:SubCategory {name: subcategory})
+        MERGE (a:SubCategory {name: subcategory})
         """
         tx.run(query, subcategory_list=subcategory_list)
+        

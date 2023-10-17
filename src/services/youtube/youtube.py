@@ -29,6 +29,8 @@ def get_influenceur() -> List[str]:
         m.update(df["channel_name"].unique())
     return list(m)
 
+
+
 # def build_tree_microinfluenceur(sheets_name_list:List[str]):
 #     current_path = os.path.dirname(f"{os.path.abspath(__file__)}")
 #     all_sheets_df = pd.read_excel(current_path+"/micro_influenceur.xlsx", sheet_name=None)
