@@ -3,9 +3,6 @@ import pandas as pd
 import os
 from logger.logger import logging
 
-
-
-
 def get_categories() -> List[str]:
     current_path = os.path.dirname(f"{os.path.abspath(__file__)}")
     all_sheets_df = pd.read_excel(current_path+"/micro_influenceur.xlsx", sheet_name=None)
@@ -30,14 +27,13 @@ def get_influenceur() -> List[str]:
     return list(m)
 
 
+def get_influenceur_all_categories() -> dict:
+    resp = dict()
+    current_path = os.path.dirname(f"{os.path.abspath(__file__)}")
+    
 
-# def build_tree_microinfluenceur(sheets_name_list:List[str]):
-#     current_path = os.path.dirname(f"{os.path.abspath(__file__)}")
-#     all_sheets_df = pd.read_excel(current_path+"/micro_influenceur.xlsx", sheet_name=None)
-    
-    
-#     for (sheet_name, df) in all_sheets_df.items():
+    for category in pd.read_excel(current_path+"/micro_influenceur.xlsx", sheet_name=None).keys():
+        df = pd.read_excel(current_path+"/micro_influenceur.xlsx", sheet_name=category)
+        resp[category] = list(df["channel_name"].unique())
         
-#         if sheet_name in sheets_name_list:
-#             logging.info("sheet_name: %s", sheet_name)
-                
+    return resp

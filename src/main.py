@@ -2,7 +2,7 @@ from typing import List
 from repositories.YoutubeInfluenceur import YoutubeInfluenceur
 from dotenv import load_dotenv
 
-from services.youtube.youtube import get_categories, get_influenceur, get_subcategory
+from services.youtube.youtube import get_categories, get_influenceur, get_subcategory,get_influenceur_all_categories
 load_dotenv()
 
 
@@ -21,7 +21,11 @@ def main():
     
     for influenceur in influenceur_list:
         youtube_influenceur.insert_influenceur(influenceur)
-    
+        
+    for category, influenceur_list in get_influenceur_all_categories().items():
+        for influenceur in influenceur_list:
+            youtube_influenceur.build_tree_link_category_influenceur(influenceur, category)
+        
     youtube_influenceur.close()
 
 if __name__ == "__main__":
