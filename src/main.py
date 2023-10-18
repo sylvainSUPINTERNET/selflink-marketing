@@ -28,6 +28,7 @@ def main():
             
             
             
+            
     for (subcat, influenceursList) in get_influenceur_all_subcategories().items():
         for influenceur in influenceursList:
             youtube_influenceur.build_tree_link_subcategory_influenceur(influenceur, subcat)
